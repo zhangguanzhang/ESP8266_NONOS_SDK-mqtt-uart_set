@@ -20,6 +20,7 @@ uint8 fifo_len = (READ_PERI_REG(UART_STATUS(UART0))>>UART_RXFIFO_CNT_S)&UART_RXF
 然后我以回车换行判断接收完成,没收到回车在下一次进来的时候接着上次的地方写入到串口缓冲区里,注释里写得很详细,这里就不截取代码说了
 
 <hr>
+
 ### 先说下使用方法
 
 一．	通讯说明和注意事项
