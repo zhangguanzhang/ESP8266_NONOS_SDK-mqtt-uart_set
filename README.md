@@ -7,16 +7,16 @@
 
 增加了串口发送命令设置mqtt的配置,以回车换行结束
 
-定义了串口缓冲区
-uint8 uart_rx_buff[rev_len]={0};
-#define rev_len 1024
-extern uint8 uart_rx_buff[rev_len];
-extern MQTT_Client mqttClient;
+定义了串口缓冲区＜/br＞
+uint8 uart_rx_buff[rev_len]={0};＜/br＞
+#define rev_len 1024＜/br＞
+extern uint8 uart_rx_buff[rev_len];＜/br＞
+extern MQTT_Client mqttClient;＜/br＞
 测试是一次mqtt可以推送1000个字节
 
-实际打印可以得知串口的数据寄存器好像最大100还是108字节来着来着,也就是串口回调函数里下面这句
-uint8 fifo_len = (READ_PERI_REG(UART_STATUS(UART0))>>UART_RXFIFO_CNT_S)&UART_RXFIFO_CNT;
-其中的fifo_len在获取后每次打印都是一样的,刚开始发送超过100个字节的话就重复进入串口中断的回调函数
+实际打印可以得知串口的数据寄存器好像最大100还是108字节来着来着,也就是串口回调函数里下面这句＜/br＞
+uint8 fifo_len = (READ_PERI_REG(UART_STATUS(UART0))>>UART_RXFIFO_CNT_S)&UART_RXFIFO_CNT;＜/br＞
+其中的fifo_len在获取后每次打印都是一样的,刚开始发送超过100个字节的话就重复进入串口中断的回调函数＜/br＞
 然后我以回车换行判断接收完成,没收到回车在下一次进来的时候接着上次的地方写入到串口缓冲区里,注释里写得很详细,这里就不截取代码说了
 
 <hr>
@@ -24,9 +24,9 @@ uint8 fifo_len = (READ_PERI_REG(UART_STATUS(UART0))>>UART_RXFIFO_CNT_S)&UART_RXF
 ### 先说下使用方法
 
 一．	通讯说明和注意事项
-    1.通信格式: (115200, 8, none, 1)波特率: 115200, 数据位:8, 无校验, 停止位:1
-    2.实现功能：查看或者设置8266的参数,上传数据
-    3.数据格式
+    1.通信格式: (115200, 8, none, 1)波特率: 115200, 数据位:8, 无校验, 停止位:1＜/br＞
+    2.实现功能：查看或者设置8266的参数,上传数据＜/br＞
+    3.数据格式＜/br＞
     
 二．	每次发送都要回车换行结束，代码逻辑回车换行结束接收和缓冲区的写入
 指令有:
